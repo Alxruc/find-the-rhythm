@@ -11,7 +11,7 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"/mnt/d/Dokumente/Coding/Python/find-the-rhythm/build/assets/frame0")
+ASSETS_PATH = OUTPUT_PATH / 'assets' / 'frame0'
 
 
 def relative_to_assets(path: str) -> Path:
@@ -42,13 +42,13 @@ entry_bg_1 = canvas.create_image(
     438.0,
     image=entry_image_1
 )
-entry_1 = Entry(
+bpmEntry = Entry(
     bd=0,
     bg="#FFFFFF",
     fg="#000716",
     highlightthickness=0
 )
-entry_1.place(
+bpmEntry.place(
     x=415.0,
     y=405.0,
     width=80.0,
@@ -62,13 +62,13 @@ entry_bg_2 = canvas.create_image(
     179.5,
     image=entry_image_2
 )
-entry_2 = Entry(
+playlistEntry = Entry(
     bd=0,
     bg="#FFFFFF",
     fg="#000716",
     highlightthickness=0
 )
-entry_2.place(
+playlistEntry.place(
     x=65.0,
     y=158.0,
     width=310.0,
@@ -77,14 +77,14 @@ entry_2.place(
 
 button_image_1 = PhotoImage(
     file=relative_to_assets("button_1.png"))
-button_1 = Button(
+playlistButton = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_1 clicked"),
     relief="flat"
 )
-button_1.place(
+playlistButton.place(
     x=45.0,
     y=210.0,
     width=350.0,
@@ -93,14 +93,14 @@ button_1.place(
 
 button_image_2 = PhotoImage(
     file=relative_to_assets("button_2.png"))
-button_2 = Button(
+randomSongButton = Button(
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_2 clicked"),
     relief="flat"
 )
-button_2.place(
+randomSongButton.place(
     x=515.0,
     y=210.0,
     width=350.0,
@@ -117,14 +117,14 @@ image_1 = canvas.create_image(
 
 button_image_3 = PhotoImage(
     file=relative_to_assets("button_3.png"))
-button_3 = Button(
+submitButton = Button(
     image=button_image_3,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_3 clicked"),
     relief="flat"
 )
-button_3.place(
+submitButton.place(
     x=395.0,
     y=509.0,
     width=120.0,
@@ -148,4 +148,3 @@ canvas.create_text(
     font=("Inter Bold", 20 * -1)
 )
 window.resizable(False, False)
-window.mainloop()
