@@ -1,0 +1,5 @@
+spotipy==2.19.0
+python-dotenv==0.19.1
+requests==2.26.0
+pygame==2.0.1
+essentia==2.1b6.dev374
