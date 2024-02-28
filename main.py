@@ -39,18 +39,25 @@ def loadPlaylist(spotify):
     global playlist
     playlistId = get_playlist_id(playlistURL.get())
     if(playlistId != None):
-        print(f'Grabbed playlist id {playlistId}')
-        playlist = spotify.playlist_tracks(playlistId)
-        return
-    print("Couldn't load playlist")
-    return None 
+        print(f'Grabbing playlist id {playlistId}')
+        try:
+            playlist = spotify.playlist_tracks(playlistId)
+            print("Playlist loaded")
+        except:
+            playlist = None
+            print("Couldn't load playlist, make sure the URL is correct and the playlist is public")
 
 def getRandomTrack():
     global playlist
     global current_audio_file
     global artistAndTitle
 
-    if(playlist == None):
+    if(playlist is None):
+        print("No playlist loaded")
+        return
+    
+    if(len(playlist['items']) == 0):
+        print("No tracks left in playlist, either load a new one or refresh the current one")
         return
     
     # Hide label in case it is still visible from last guess
@@ -63,6 +70,7 @@ def getRandomTrack():
 
     tracks = playlist['items']
     random_track = random.choice(tracks)
+    playlist['items'].remove(random_track)
     preview_url = random_track['track']['preview_url']
 
     # Getting the artist(s) and song title to display, truncating it to a max of 35 characters
@@ -90,7 +98,9 @@ def getRandomTrack():
         pygame.mixer.music.load(current_audio_file)
         pygame.mixer.music.play()
     else:
-        songPlaying_label.config(text="No preview available, try again")
+        print(songPlayingString + " has no preview available, trying a different song" + "\n")
+        getRandomTrack()
+    
 
 def getTempo():
     global current_audio_file
